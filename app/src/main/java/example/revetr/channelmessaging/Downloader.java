@@ -1,5 +1,6 @@
 package example.revetr.channelmessaging;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import java.io.BufferedReader;
@@ -23,6 +24,13 @@ import javax.net.ssl.HttpsURLConnection;
 public class Downloader extends AsyncTask<Void, Void, String> implements OnDownloadCompleteListener {
 
     ArrayList<OnDownloadCompleteListener> dowlist = new ArrayList<OnDownloadCompleteListener>();
+    private String url;
+    HashMap<String, String> postparams = new HashMap<>();
+
+    public Downloader(String url, HashMap<String, String> postparams) {
+        this.url = url;
+        this.postparams = postparams;
+    }
 
     public void setDowlist(OnDownloadCompleteListener dowlist) {
         this.dowlist.add(dowlist);
@@ -36,10 +44,7 @@ public class Downloader extends AsyncTask<Void, Void, String> implements OnDownl
 
     @Override
     protected String doInBackground(Void...params){
-        HashMap<String, String> postparams = new HashMap<>();
-        postparams.put("username", "rreve");
-        postparams.put("password", "romainrevet");
-        String response= performPostCall("http://www.raphaelbischof.fr/messaging/?function=connect", postparams);
+        String response = performPostCall(url,postparams);
         return response;
     }
 
