@@ -10,7 +10,15 @@ public class Channels {
         this.channels = channels;
     }
 
+    public ArrayList<Channel> getChannels() {
+        return channels;
+    }
+
     private ArrayList<Channel> channels;
+
+    public int getIdChannel(int position){
+
+    }
 
 
 }
