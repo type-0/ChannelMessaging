@@ -16,9 +16,5 @@ public class Channels {
 
     private ArrayList<Channel> channels;
 
-    public int getIdChannel(int position){
-
-    }
-
 
 }

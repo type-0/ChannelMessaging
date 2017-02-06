@@ -31,20 +31,18 @@ public class ChannelListActivity extends AppCompatActivity implements OnDownload
         d.setDowlist(this);
         d.execute();
         channelListe.setOnItemClickListener(this);
-
     }
 
     public void onDownloadCompleted(String content) {
         Gson gson = new Gson();
-        Channels listChannels = gson.fromJson(content, Channels.class);
+        listChannels = gson.fromJson(content, Channels.class);
         channelListe.setAdapter(new MyArrayAdapter(getApplicationContext(), listChannels.getChannels()));
-
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent myIntent = new Intent(getApplicationContext(),ChannelActivity.class);
-        myIntent.putExtra("channelID", listChannels.getChannels().);
+        myIntent.putExtra("channelID", listChannels.getChannels().get(position).getchannelID());
         startActivity(myIntent);
     }
 }

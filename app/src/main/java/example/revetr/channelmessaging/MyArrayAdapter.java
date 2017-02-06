@@ -33,4 +33,9 @@ public class MyArrayAdapter extends ArrayAdapter<Channel> {
             usersConnected.setText("Nombre d'utilisateurs connectés: " + String.valueOf(chan.getconnectedusers()));
         return rowView;
     }
+
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
 }
