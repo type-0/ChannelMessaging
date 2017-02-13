@@ -13,13 +13,15 @@
             android:layout_width="55dp"
             android:layout_height="42dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/User" />
+            android:id="@+id/User"
+            android:textColor="#121111" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:id="@+id/Message" />
+            android:id="@+id/Message"
+            android:textColor="#121111" />
     </LinearLayout>
 
     <TextView
@@ -27,5 +29,6 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/Time"
-        android:layout_weight="0.04" />
+        android:layout_weight="0.04"
+        android:textColor="#121111" />
 </LinearLayout>

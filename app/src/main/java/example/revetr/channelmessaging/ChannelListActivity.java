@@ -27,13 +27,13 @@ public class ChannelListActivity extends AppCompatActivity implements OnDownload
         String accestoken = settings.getString("accesstoken","");
         postparams.put("accesstoken",accestoken);
         String url = "http://www.raphaelbischof.fr/messaging/?function=getchannels";
-        Downloader d = new Downloader(url,postparams);
+        Downloader d = new Downloader(url,postparams,2);
         d.setDowlist(this);
         d.execute();
         channelListe.setOnItemClickListener(this);
     }
 
-    public void onDownloadCompleted(String content) {
+    public void onDownloadCompleted(String content, int requestcode) {
         Gson gson = new Gson();
         listChannels = gson.fromJson(content, Channels.class);
         channelListe.setAdapter(new MyArrayAdapter(getApplicationContext(), listChannels.getChannels()));

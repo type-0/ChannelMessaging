@@ -39,13 +39,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         postparams.put("username", Login);
         postparams.put("password", Password);
         String url = "http://www.raphaelbischof.fr/messaging/?function=connect";
-        Downloader d = new Downloader(url,postparams);
+        Downloader d = new Downloader(url,postparams,1);
         d.setDowlist(this);
         d.execute();
     }
 
     @Override
-    public void onDownloadCompleted(String content) {
+    public void onDownloadCompleted(String content, int requestcode) {
         Gson gson = new Gson();
         Response reponse = gson.fromJson(content, Response.class);
         if(reponse.getAccesstoken() != null){

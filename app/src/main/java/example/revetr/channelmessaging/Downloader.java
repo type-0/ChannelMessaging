@@ -21,25 +21,21 @@ import javax.net.ssl.HttpsURLConnection;
 /**
  * Created by revetr on 20/01/2017.
  */
-public class Downloader extends AsyncTask<Void, Void, String> implements OnDownloadCompleteListener {
+public class Downloader extends AsyncTask<Void, Void, String>  {
 
     ArrayList<OnDownloadCompleteListener> dowlist = new ArrayList<OnDownloadCompleteListener>();
     private String url;
     HashMap<String, String> postparams = new HashMap<>();
+    private int requestcode;
 
-    public Downloader(String url, HashMap<String, String> postparams) {
+    public Downloader(String url, HashMap<String, String> postparams, int requestcode) {
         this.url = url;
         this.postparams = postparams;
+        this.requestcode = requestcode;
     }
 
     public void setDowlist(OnDownloadCompleteListener dowlist) {
         this.dowlist.add(dowlist);
-    }
-
-    @Override
-
-    public void onDownloadCompleted(String content){
-
     }
 
     @Override
@@ -52,7 +48,7 @@ public class Downloader extends AsyncTask<Void, Void, String> implements OnDownl
     protected void onPostExecute(String s){
         super.onPostExecute(s);
         for(OnDownloadCompleteListener oneListener : dowlist){
-            oneListener.onDownloadCompleted(s);
+            oneListener.onDownloadCompleted(s,requestcode);
         }
     }
 
