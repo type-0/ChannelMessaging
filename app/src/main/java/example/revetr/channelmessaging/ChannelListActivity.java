@@ -13,8 +13,11 @@ import com.google.gson.Gson;
 
 import java.util.HashMap;
 
-public class ChannelListActivity extends AppCompatActivity implements OnDownloadCompleteListener, AdapterView.OnItemClickListener {
-    private ListView channelListe;
+import FragmentPackage.ChannelListFragment;
+import FragmentPackage.MessageFragment;
+
+public class ChannelListActivity extends AppCompatActivity implements /*OnDownloadCompleteListener,*/AdapterView.OnItemClickListener {
+    /*private ListView channelListe;
     HashMap<String, String> postparams = new HashMap<>();
     private Channels listChannels;
 
@@ -44,5 +47,23 @@ public class ChannelListActivity extends AppCompatActivity implements OnDownload
         Intent myIntent = new Intent(getApplicationContext(),ChannelActivity.class);
         myIntent.putExtra("channelID", listChannels.getChannels().get(position).getchannelID());
         startActivity(myIntent);
+    }*/
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.ChannelListActivity);
+    }
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        ChannelListFragment fragA = (FragmentA)getSupportFragmentManager().findFragmentById(R.id.fragmentA_ID);
+        MessageFragment fragB = (FragmentB)getSupportFragmentManager().findFragmentById(R.id.fragmentB_ID);
+        if(fragB == null|| !fragB.isInLayout()){
+            Intent i = new Intent(getApplicationContext(),ChannelActivity.class);
+            i.putExtra("channelID",fragA.listItems[position]);
+            startActivity(i);
+        } else {
+            fragB.fillTextView(fragA.listItems[position]);
+        }
     }
 }
