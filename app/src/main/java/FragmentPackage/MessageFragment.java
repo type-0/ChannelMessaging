@@ -14,8 +14,10 @@ import android.widget.ListView;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import example.revetr.channelmessaging.Channel;
 import example.revetr.channelmessaging.ChannelMessages;
 import example.revetr.channelmessaging.Downloader;
 import example.revetr.channelmessaging.MessageArrayAdapter;
@@ -54,18 +56,18 @@ public class MessageFragment extends Fragment implements View.OnClickListener, O
         final Handler handler = new Handler();
         final Runnable r = new Runnable() {
             public void run() {
-                Downloader d = new Downloader(url,postparams,3);
-                d.setDowlist(dowlisten);
-                d.execute();
-                handler.postDelayed(this, 1000);
+                if(getActivity() != null){
+                    Downloader d = new Downloader(url,postparams,3);
+                    d.setDowlist(dowlisten);
+                    d.execute();
+                    handler.postDelayed(this, 1000);
+                }
             }
         };
         handler.postDelayed(r, 1000);
         return v;
     }
-    public void fillTextView(String listItem) {
-        tvExample.setText(listItem);
-    }
+
 
     @Override
     public void onClick(View v) {
@@ -74,11 +76,12 @@ public class MessageFragment extends Fragment implements View.OnClickListener, O
         int channelid = intent.getIntExtra("channelID",0);
         SharedPreferences settings = getActivity().getSharedPreferences("carcajou",0);
         String accestoken = settings.getString("accesstoken","");
-        postparams.put("accesstoken",accestoken);
-        postparams.put("channelid",""+channelid);
-        postparams.put("message", newMessage);
+        HashMap<String, String> p = new HashMap<>();
+        p.put("accesstoken",accestoken);
+        p.put("channelid",""+channelid);
+        p.put("message", newMessage);
         String url = "http://www.raphaelbischof.fr/messaging/?function=sendmessage";
-        Downloader d = new Downloader(url,postparams,4);
+        Downloader d = new Downloader(url,p,4);
         d.setDowlist(this);
         d.execute();
     }
@@ -90,5 +93,9 @@ public class MessageFragment extends Fragment implements View.OnClickListener, O
             MessagesList = gson.fromJson(content, ChannelMessages.class);
             messagesListe.setAdapter(new MessageArrayAdapter(getActivity().getApplicationContext(), MessagesList.getMessages()));
         }
+    }
+
+    public void changeChannelId(int channelId){
+        postparams.put("channelid",""+channelId);
     }
 }

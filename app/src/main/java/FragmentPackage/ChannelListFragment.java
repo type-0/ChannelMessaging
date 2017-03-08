@@ -26,6 +26,11 @@ import example.revetr.channelmessaging.R;
 public class ChannelListFragment extends Fragment implements OnDownloadCompleteListener {
     private ListView channelListe;
     HashMap<String, String> postparams = new HashMap<>();
+
+    public Channels getListChannels() {
+        return listChannels;
+    }
+
     private Channels listChannels;
 
 
@@ -46,8 +51,6 @@ public class ChannelListFragment extends Fragment implements OnDownloadCompleteL
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        channelListe.setAdapter(new ArrayAdapter(getActivity(),
-                android.R.layout.simple_list_item_1, listItems));
         channelListe.setOnItemClickListener((ChannelListActivity)getActivity());
     }
 

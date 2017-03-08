@@ -9,7 +9,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="example.revetr.channelmessaging.ChannelActivity">
 
-    <ListView
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="FragmentPackage.MessageFragment"
+        android:id="@+id/fragmentB_ID"
+        android:layout_gravity="right" />
+
+    <!--<ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/messagesList"
@@ -36,6 +43,6 @@
             android:text="Envoyer"
             android:id="@+id/sendButton" />
 
-    </LinearLayout>
+    </LinearLayout>-->
 
 </RelativeLayout>

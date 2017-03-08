@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,9 @@ import com.google.gson.Gson;
 import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, OnDownloadCompleteListener {
+
+    private static final String TAG = "LoginActivity";
+
     protected String Login;
     protected String Password;
     protected Button ValidateButton;
@@ -47,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onDownloadCompleted(String content, int requestcode) {
         Gson gson = new Gson();
+        Log.e(TAG, "onDownloadCompleted: " + content );
         Response reponse = gson.fromJson(content, Response.class);
         if(reponse.getAccesstoken() != null){
             SharedPreferences settings = getSharedPreferences("carcajou",0);

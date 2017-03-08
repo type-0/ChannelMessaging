@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <fragment
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:name="FragmentPackage.ChannelListFragment"
+        android:id="@+id/fragmentA_ID" />
+    <fragment
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:name="FragmentPackage.MessageFragment"
+        android:id="@+id/fragmentB_ID"
+        android:layout_gravity="center_vertical" />
+
+</LinearLayout>

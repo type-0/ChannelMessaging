@@ -17,11 +17,11 @@ import FragmentPackage.ChannelListFragment;
 import FragmentPackage.MessageFragment;
 
 public class ChannelListActivity extends AppCompatActivity implements /*OnDownloadCompleteListener,*/AdapterView.OnItemClickListener {
-    /*private ListView channelListe;
+    private ListView channelListe;
     HashMap<String, String> postparams = new HashMap<>();
     private Channels listChannels;
 
-    @Override
+    /*@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_channel_list);
@@ -40,9 +40,9 @@ public class ChannelListActivity extends AppCompatActivity implements /*OnDownlo
         Gson gson = new Gson();
         listChannels = gson.fromJson(content, Channels.class);
         channelListe.setAdapter(new MyArrayAdapter(getApplicationContext(), listChannels.getChannels()));
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent myIntent = new Intent(getApplicationContext(),ChannelActivity.class);
         myIntent.putExtra("channelID", listChannels.getChannels().get(position).getchannelID());
@@ -52,18 +52,19 @@ public class ChannelListActivity extends AppCompatActivity implements /*OnDownlo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.ChannelListActivity);
+        setContentView(R.layout.activity_channel_list);
     }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        ChannelListFragment fragA = (FragmentA)getSupportFragmentManager().findFragmentById(R.id.fragmentA_ID);
-        MessageFragment fragB = (FragmentB)getSupportFragmentManager().findFragmentById(R.id.fragmentB_ID);
+        ChannelListFragment fragA = (ChannelListFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentA_ID);
+        MessageFragment fragB = (MessageFragment)getSupportFragmentManager().findFragmentById(R.id.fragmentB_ID);
         if(fragB == null|| !fragB.isInLayout()){
             Intent i = new Intent(getApplicationContext(),ChannelActivity.class);
-            i.putExtra("channelID",fragA.listItems[position]);
+            i.putExtra("channelID",fragA.getListChannels().getChannels().get(position).getchannelID());
             startActivity(i);
         } else {
-            fragB.fillTextView(fragA.listItems[position]);
+            fragB.changeChannelId(fragA.getListChannels().getChannels().get(position).getchannelID());
         }
     }
 }
