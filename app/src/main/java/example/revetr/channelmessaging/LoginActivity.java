@@ -1,8 +1,10 @@
 package example.revetr.channelmessaging;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
@@ -23,6 +27,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected String Password;
     protected Button ValidateButton;
     HashMap<String, String> postparams = new HashMap<>();
+    Handler mHandlerTada = new Handler(); // android.os.handler
+    int mShortDelay = 4000; //milliseconds
+
+
 
 
     @Override
@@ -31,6 +39,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         ValidateButton =(Button) findViewById(R.id.ValidateButton);
         ValidateButton.setOnClickListener(this);
+        mHandlerTada.postDelayed(new Runnable(){
+            public void run(){
+                YoYo.with(Techniques.Tada)
+                        .duration(1000)
+                        .playOn(findViewById(R.id.logo));
+                mHandlerTada.postDelayed(this, mShortDelay);
+            }
+        }, mShortDelay);
 
     }
 
@@ -58,8 +74,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             SharedPreferences.Editor editor = settings.edit();
             editor.putString("accesstoken",reponse.getAccesstoken());
             editor.commit();
-            Intent myIntent = new Intent(getApplicationContext(),ChannelListActivity.class);
-            startActivity(myIntent);
+            Intent loginIntent = new Intent(LoginActivity.this, ChannelListActivity.class);
+            startActivity(loginIntent, ActivityOptions.makeSceneTransitionAnimation(LoginActivity.this, findViewById(R.id.logo), "logo").toBundle());
+            /*Intent myIntent = new Intent(getApplicationContext(),ChannelListActivity.class);
+            startActivity(myIntent);*/
         }
         else{
             Context context = getApplicationContext();

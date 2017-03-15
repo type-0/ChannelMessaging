@@ -16,7 +16,8 @@
         android:layout_height="200dp"
         android:layout_marginLeft="75dp"
         android:src= "@drawable/channel_messaging_logo"
-        android:tint="@color/black"/>
+        android:tint="@color/black"
+        android:transitionName="logo" />
 
     <fragment
         android:layout_width="wrap_content"

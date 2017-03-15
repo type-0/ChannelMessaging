@@ -26,4 +26,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
     // Support lib for material design
     compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:support-compat:25.1.1'
+    compile 'com.daimajia.easing:library:2.0@aar'
+    compile 'com.daimajia.androidanimations:library:2.2@aar'
+    //AVLoadingIndicator
+    compile 'com.wang.avi:library:2.1.3'
 }
