@@ -3,6 +3,7 @@ package example.revetr.channelmessaging;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,7 @@ public class ChannelActivity extends AppCompatActivity implements View.OnClickLi
     HashMap<String, String> postparams = new HashMap<>();
     private ChannelMessages MessagesList;
     private Button sendButton;
+    private Button soundButton;
     private String newMessage;
     private EditText txtFieldMessage;
 
@@ -30,6 +32,8 @@ public class ChannelActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_channel);
         sendButton =(Button) findViewById(R.id.sendButton);
         sendButton.setOnClickListener(this);
+        soundButton =(Button) findViewById(R.id.Son);
+        soundButton.setOnClickListener(this);
         txtFieldMessage = (EditText) findViewById(R.id.newMessage);
         messagesListe =(ListView) findViewById(R.id.messagesList);
         Intent intent = getIntent();
@@ -65,17 +69,23 @@ public class ChannelActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        newMessage = txtFieldMessage.getText().toString();
-        Intent intent = getIntent();
-        int channelid = intent.getIntExtra("channelID",0);
-        SharedPreferences settings = getSharedPreferences("carcajou",0);
-        String accestoken = settings.getString("accesstoken","");
-        postparams.put("accesstoken",accestoken);
-        postparams.put("channelid",""+channelid);
-        postparams.put("message", newMessage);
-        String url = "http://www.raphaelbischof.fr/messaging/?function=sendmessage";
-        Downloader d = new Downloader(url,postparams,4);
-        d.setDowlist(this);
-        d.execute();
+        if (v == sendButton) {
+            newMessage = txtFieldMessage.getText().toString();
+            Intent intent = getIntent();
+            int channelid = intent.getIntExtra("channelID", 0);
+            SharedPreferences settings = getSharedPreferences("carcajou", 0);
+            String accestoken = settings.getString("accesstoken", "");
+            postparams.put("accesstoken", accestoken);
+            postparams.put("channelid", "" + channelid);
+            postparams.put("message", newMessage);
+            String url = "http://www.raphaelbischof.fr/messaging/?function=sendmessage";
+            Downloader d = new Downloader(url, postparams, 4);
+            d.setDowlist(this);
+            d.execute();
+        }
+        else if (v == soundButton) {
+            DialogFragment newFragment = new RecordSoundDialogFragment();
+            newFragment.show(getSupportFragmentManager(), "son");
+        }
     }
 }
