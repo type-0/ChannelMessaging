@@ -2,7 +2,9 @@
     <string name="app_name">ChannelMessaging</string>
     <string name="login">Identifiant</string>
     <string name="password">Mot de passe</string>
-    <string name="dialog_record_sound">Enregistrer un son?</string>
+    <string name="dialog_record_sound">Enregistrer un son</string>
     <string name="record">Enregistrer</string>
     <string name="cancel">Annuler</string>
+    <string name="no_internet">Aucune connexion internet détectée</string>
+    <string name="wrong_login">Informations de connexion erronées</string>
 </resources>
